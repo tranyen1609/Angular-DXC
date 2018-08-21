@@ -52,6 +52,7 @@ export class UsersComponent implements OnInit {
 
   pageChanged(page) {
     this.p = page;
+    console.log(page);
     this.getUsers();
   }
 

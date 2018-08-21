@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbdModalBasic } from './address/addressDetails/addressDetails.Modal'
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,7 +33,9 @@ import { AddressComponent } from './address/address.component';
     ContactComponent,
     SidebarComponent,
     HomeComponent,
-    AddressComponent
+    AddressComponent,
+
+    NgbdModalBasic
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,9 @@ import { AddressComponent } from './address/address.component';
     HttpClientModule,
     AppRoutingModule,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    NgbModalModule
   ],
   providers: [
     UserService,
