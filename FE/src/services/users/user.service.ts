@@ -60,13 +60,4 @@ export class UserService {
       map ( Response => JSON.stringify(Response) ),
       catchError(error) );
   }
-
-  // createUser (username: string, pass: string) {
-  //   let user: User = new User( username, pass );
-  //   let options = {headers: new Headers( { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+ localStorage.getItem("token") } )};
-  //   return this.http.post(this.apiUrl, user, options).pipe(
-  //     map ( Response => Response.json() ),
-  //     catchError(error) );
-  // }
-  
 }

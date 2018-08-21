@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAddressesDetail, AddressDetail } from '../../models/user';
+import { UserAddressesDetail, AddressDetail } from '../../models/address';
 import { CountryData } from '../../models/country';
 import { CityData } from '../../models/city';
 import { AddressData, Address } from '../../models/address';
@@ -50,7 +50,7 @@ export class UserDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     return this.addressService.getUserAddressFromId(id).subscribe(data => {
       if (Object.keys(data).length > 0) {
-        // this.addressesDetail = data[0];
+        this.addressesDetail = data[0];
         this.myId = id;
         this.myUser = this.addressesDetail.user.name;
         this.myPass = this.addressesDetail.user.password;
@@ -92,13 +92,13 @@ export class UserDetailComponent implements OnInit {
 
   getCountries() {
     return this.addressService.getCountries().subscribe(data => {
-      // this.countryData = data;
+      this.countryData = data;
     });
   }
 
   getCitiesFromId(id: number) {
     return this.addressService.getCitiesFromId(id).subscribe(data => {
-      // this.cityData = data;
+      this.cityData = data;
       this.idCity = 0;
       this.idDistrict = 0;
       this.getDistrictsFromId(this.idCity);
@@ -107,7 +107,7 @@ export class UserDetailComponent implements OnInit {
 
   getDistrictsFromId(id: number) {
     return this.addressService.getDistrictsFromId(id).subscribe(data => {
-      // this.districtData = data;
+      this.districtData = data;
     });
   }
 
