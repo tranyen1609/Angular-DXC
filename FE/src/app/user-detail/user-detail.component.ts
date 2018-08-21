@@ -23,7 +23,7 @@ export class UserDetailComponent implements OnInit {
   addressesDetail: UserAddressesDetail;
   addresses: AddressDetail[];
   addressData: Address;
-  
+
   countryData: CountryData = new CountryData();
   cityData: CityData = new CityData();
   districtData: DistrictData = new DistrictData();
@@ -38,6 +38,8 @@ export class UserDetailComponent implements OnInit {
   detail_address = true;
   detail_user = true;
 
+  message: string;
+
   constructor(private location: Location, private addressService: AddressService, private userService: UserService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -48,7 +50,7 @@ export class UserDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     return this.addressService.getUserAddressFromId(id).subscribe(data => {
       if (Object.keys(data).length > 0) {
-        this.addressesDetail = data[0];
+        // this.addressesDetail = data[0];
         this.myId = id;
         this.myUser = this.addressesDetail.user.name;
         this.myPass = this.addressesDetail.user.password;
@@ -56,7 +58,7 @@ export class UserDetailComponent implements OnInit {
       }
     });
   }
-  
+
   getAddressFromId(id: number, addresstype: string) {
     this.addressType = addresstype;
     return this.addressService.getAddressFromId(id).subscribe(data => {
@@ -74,24 +76,29 @@ export class UserDetailComponent implements OnInit {
     });
   }
 
-  updateAddressFromId(){
-    let address: Address = new Address(+this.addressTypeId, +this.idCountry, +this.idCity, +this.idDistrict,this.street);
-    console.log(address);
-    return this.addressService.updateAddressFromId(+this.idAddress, address).subscribe(data => {
-      this.detail_address = true;
-    });
+  updateAddressFromId() {
+    if (this.idCountry != 0 && this.idCity != 0 && this.idDistrict != 0) {
+      let address: Address = new Address(+this.addressTypeId, +this.idCountry, +this.idCity, +this.idDistrict, this.street);
+      console.log(address);
+      this.addressService.updateAddressFromId(+this.idAddress, address).subscribe(data => {
+        this.detail_address = true;
+      });
+    }
+    else
+    {
+      this.message = "The information is invalid!";
+    }
   }
 
   getCountries() {
     return this.addressService.getCountries().subscribe(data => {
-      this.countryData = data;
-      // this.getCitiesFromId();
+      // this.countryData = data;
     });
   }
 
   getCitiesFromId(id: number) {
     return this.addressService.getCitiesFromId(id).subscribe(data => {
-      this.cityData = data;
+      // this.cityData = data;
       this.idCity = 0;
       this.idDistrict = 0;
       this.getDistrictsFromId(this.idCity);
@@ -100,7 +107,7 @@ export class UserDetailComponent implements OnInit {
 
   getDistrictsFromId(id: number) {
     return this.addressService.getDistrictsFromId(id).subscribe(data => {
-      this.districtData = data;
+      // this.districtData = data;
     });
   }
 
@@ -110,7 +117,7 @@ export class UserDetailComponent implements OnInit {
       this.router.navigate(['main']));
   }
 
-  editUser(){
+  editUser() {
     this.detail_user = false;
   }
 

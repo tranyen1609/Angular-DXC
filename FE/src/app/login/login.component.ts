@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { User, UserData } from '../../models/user';
 import { UserService } from '../../services/users/user.service';
-import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +13,7 @@ export class LoginComponent implements OnInit {
   myPassword: string;
   status: string = "";
   userdata: UserData = new UserData();
-  constructor(private http: Http, private router: Router, private userService: UserService) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit() {
     this.VerifyAccess();

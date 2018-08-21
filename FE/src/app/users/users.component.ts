@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/users/user.service';
@@ -41,7 +40,7 @@ export class UsersComponent implements OnInit {
   idDistrict_Work = 0;
   // formUsers: FormGroup;
 
-  constructor(private http: Http, private router: Router, private userService: UserService, private addressService: AddressService, private fb: FormBuilder) { 
+  constructor(private router: Router, private userService: UserService, private addressService: AddressService, private fb: FormBuilder) { 
     // this.formUsers = new FormGroup({
     //   Country: new FormControl()
     // });
@@ -60,13 +59,12 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/detail/'+id]);
   }
 
-  getUsers() {
-    return this.userService.getUsers(4,this.p).subscribe(data => {
+  getUsers(): void {
+    this.userService.getUsers(4,this.p).subscribe((data) => {
       if(Object.keys(data).length > 0){
         this.userdata = data;
-        this.totalItems = this.userdata.pagination.totalItems;
+        this.totalItems = data.pagination.totalItems;
         this.totalPages = Math.ceil(this.totalItems/4);
-        // this.pages = new Array(this.totalPages);
       }
       else
       {

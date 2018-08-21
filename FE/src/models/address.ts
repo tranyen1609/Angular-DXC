@@ -14,8 +14,8 @@ export class Address {
     cityId: number;
     districtId: number;
     street: string;
-    constructor(countryid: number, cityid: number, districtid: number, st: string) {
-        // this.addressTypeId = addresstypeid;
+    constructor(addresstypeid: number, countryid: number, cityid: number, districtid: number, st: string) {
+        this.addressTypeId = addresstypeid;
         this.countryId = countryid;
         this.cityId = cityid;
         this.districtId = districtid;
