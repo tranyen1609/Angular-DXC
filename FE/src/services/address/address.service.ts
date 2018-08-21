@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { User, UserAddress, Address } from '../../models/user';
+import { User } from '../../models/user';
+import { UserAddress, Address } from '../../models/address';
 import { error } from '@angular/compiler/src/util';
 import { CountryData } from '../../models/country';
 import { CityData } from '../../models/city';
