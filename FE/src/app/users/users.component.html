@@ -1,0 +1,216 @@
+<div class="users-list">
+    <p>USERS LIST</p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Password</th>
+                <th>Detail</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of userdata.users | paginate: {itemsPerPage: 4, currentPage: p, totalItems: totalItems}">
+                <!-- <tr *ngFor="let x of userdata.users"> -->
+                <td>{{ x.id }}</td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.password }}</td>
+                <!-- <td>
+                    <button type="button" class="btn btn-default" routerLink="/detail/{{ x.id }}">Edit</button>
+                </td> -->
+                <td>
+                    <button type="button" class="btn btn-default" (click)="edit(x.id)">Detail</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger" (click)="deleteUser(x.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    </div>
+
+    <!-- <a href="#" class="nav-link" (click)="onPre($event)" *ngIf="currentPage != 1">&laquo;</a>
+    <div *ngFor="let p of pages; let i=index">
+        <a href="#" class="nav-link" (click)="setPage(i,$event)" [ngClass]="{'active': currentPage==i+1}">{{ i+1 }}</a>
+    </div>
+    <a href="#" class="nav-link" (click)="onNext($event)" *ngIf="currentPage != totalPages">&raquo;</a> -->
+    <div class="btn-action">
+        <button data-toggle="modal" data-target="#modal-add" class="btn btn-primary" (click)="getCountries_Home(); getCountries_Work()">ADD USER</button>
+    </div>
+
+</div>
+
+<div class="modal fade" id="modal-add" data-backdrop="static">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">CREATE ACCOUNT</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form #form="ngForm">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>User name*</th>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="newUser" name="user" #name="ngModel" required>
+                                </td>
+                                <td>
+                                    <div class="status" *ngIf="name?.errors?.required && name?.touched">Enter your user name!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Password*</th>
+                                <td>
+                                    <input type="text" class="form-control" [(ngModel)]="newPass" name="pass" #pass="ngModel" required>
+                                </td>
+                                <td>
+                                    <div class="status" *ngIf="pass?.errors?.required && pass?.touched">Enter your password!</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Gender</th>
+                                <td class="gender">
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label" for="radio1">
+                                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check-inline">
+                                        <label class="form-check-label" for="radio2">
+                                            <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Female
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number</th>
+                                <td>
+                                    <input type="number" class="form-control" [(ngModel)]="phoneNumber" name="phone">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Day of Birth</th>
+                                <td>
+                                    <input type="date" class="form-control" [(ngModel)]="newBirthday" name="day">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div id="accordion">
+                        <div class="card">
+                            <a class="card-header card-link" data-toggle="collapse" href="#collapseOne">
+                                Home address
+                                <img src="../../assets/images/expandmore.png">
+                            </a>
+                            <div id="collapseOne" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr class="form-group">
+                                                <th for="my-input">Country</th>
+                                                <td>
+                                                    <select id="my-input" class="form-control" [(ngModel)]="idCountry_Home" name="countryItem" (change)="getCitiesFromId_Home()">
+                                                        <option [value]="0">Select country</option>
+                                                        <option *ngFor="let ctr of countryData_Home.countries" [value]="ctr.id">{{ ctr.name }}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr class="form-group">
+                                                <th for="my-input">City</th>
+                                                <td>
+                                                    <select id="my-input" class="form-control" [(ngModel)]="idCity_Home" name="cityItem" (change)="getDistrictsFromId_Home()">
+                                                        <option [value]="0">Select city</option>
+                                                        <option *ngFor="let ct of cityData_Home.cities" [value]="ct.id">{{ ct.name }}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr class="form-group">
+                                                <th for="my-input">District</th>
+                                                <td>
+                                                    <select id="my-input" class="form-control" [(ngModel)]="idDistrict_Home" name="districtItem">
+                                                        <option [value]="0">Select district</option>
+                                                        <option *ngFor="let d of districtData_Home.districts" [value]="d.id">{{ d.name }}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Street</th>
+                                                <td>
+                                                    <input class="form-control" type="text" [(ngModel)]="newStreet_Home" name="street">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="accordion">
+                        <div class="card">
+                            <a class="card-header card-link" data-toggle="collapse" href="#collapseWork">
+                                Work address
+                                <img src="../../assets/images/expandmore.png">
+                            </a>
+                            <div id="collapseWork" class="collapse" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr class="form-group">
+                                                <th for="my-input">Country</th>
+                                                <td>
+                                                    <select id="my-input" class="form-control" [(ngModel)]="idCountry_Work" name="countryItem_Work" (change)="getCitiesFromId_Work()">
+                                                        <option [value]="0">Select country</option>
+                                                        <option *ngFor="let ctr of countryData_Work.countries" [value]="ctr.id">{{ ctr.name }}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr class="form-group">
+                                                <th for="my-input">City</th>
+                                                <td>
+                                                    <select id="my-input" class="form-control" [(ngModel)]="idCity_Work" name="cityItem_Work" (change)="getDistrictsFromId_Work()">
+                                                        <option [value]="0">Select city</option>
+                                                        <option *ngFor="let ct of cityData_Work.cities" [value]="ct.id">{{ ct.name }}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr class="form-group">
+                                                <th for="my-input">District</th>
+                                                <td>
+                                                    <select id="my-input" class="form-control" [(ngModel)]="idDistrict_Work" name="districtItem_Work">
+                                                        <option [value]="0">Select district</option>
+                                                        <option *ngFor="let d of districtData_Work.districts" [value]="d.id">{{ d.name }}</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Street</th>
+                                                <td>
+                                                    <input class="form-control" type="text" [(ngModel)]="newStreet_Work" name="street_Work">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createUser()" [disabled]="form.invalid">Save</button>
+            </div>
+
+        </div>
+    </div>
+</div>

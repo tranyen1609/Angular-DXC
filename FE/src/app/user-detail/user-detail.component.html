@@ -1,0 +1,126 @@
+<div class="user-detail">
+    <p>USER DETAIL</p>
+    <table class="table table-borderless">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ myId }}</td>
+                <td> </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-borderless" *ngIf="detail_user; else edit_user">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ myUser }}</td>
+                <td>
+                    <a (click)="editUser()">
+                        <img src="../../assets/images/edit.png"> Edit</a>
+                </td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ myPass }}</td>
+                <td>
+                    <a (click)="editUser()">
+                        <img src="../../assets/images/edit.png"> Edit</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #edit_user>
+        <div class="form-edit">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr class="form-group">
+                        <th>Name</th>
+                        <td>
+                            <input class="form-control" type="text" [(ngModel)]="myUser">
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <th>Password</th>
+                        <td>
+                            <input class="form-control" type="text" [(ngModel)]="myPass">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="btn-action form-edit">
+                <button type="button" class="btn btn-primary btn-save" (click)="updateUser()">Save</button>
+                <button (click)="cancel()" class="btn btn-primary btn-outline-secondary">Cancel</button>
+            </div>
+        </div>
+    </ng-template>
+
+    <hr style="width: 80%;">
+    <div *ngIf="addresses!=''; else add_address">
+        <table class="table table-borderless" *ngIf="detail_address; else edit_address">
+            <tbody>
+                <tr *ngFor="let ad of addresses">
+                    <th>{{ ad.addressType }}address:</th>
+                    <td>{{ ad.street }}{{ ad.district }}{{ ad.city }}{{ ad.country }}</td>
+                    <td>
+                        <a (click)="getAddressFromId(ad.id,ad.addressType)" class="btn-edit">
+                            <img src="../../assets/images/edit.png"> Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #edit_address>
+            <div class="form-edit">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr class="form-group">
+                            <th>{{ addressType }}address</th>
+                            <th for="my-input">Country</th>
+                            <td>
+                                <select id="my-input" class="form-control" [(ngModel)]="idCountry" name="countryItem" (change)="getCitiesFromId($event.target.value)">
+                                    <option [value]="0">Select country</option>
+                                    <option *ngFor="let ctr of countryData.countries" [value]="ctr.id">{{ ctr.name }}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="form-group">
+                            <th></th>
+                            <th for="my-input">City</th>
+                            <td>
+                                <select id="my-input" class="form-control" [(ngModel)]="idCity" name="cityItem" (change)="getDistrictsFromId($event.target.value)">
+                                    <option [value]="0">Select city</option>
+                                    <option *ngFor="let ct of cityData.cities" [value]="ct.id">{{ ct.name }}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="form-group">
+                            <th></th>
+                            <th for="my-input">District</th>
+                            <td>
+                                <select id="my-input" class="form-control" [(ngModel)]="idDistrict" name="districtItem">
+                                    <option [value]="0">Select district</option>
+                                    <option *ngFor="let d of districtData.districts" [value]="d.id">{{ d.name }}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Street</th>
+                            <td>
+                                <input class="form-control" type="text" [(ngModel)]="street" name="street">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="btn-action form-edit">
+                    <button type="button" class="btn btn-primary btn-save" (click)="updateAddressFromId()">Save</button>
+                    <button (click)="cancel()" class="btn btn-primary btn-outline-secondary">Cancel</button>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+    <ng-template #add_address>
+        <div class="update-address">
+            <a routerLink="/address"><strong>+</strong> Update address</a>
+        </div>
+    </ng-template>
+</div>
