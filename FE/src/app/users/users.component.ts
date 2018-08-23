@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { UserService } from '../../services/users/user.service';
 import { AddressService } from '../../services/address/address.service';
 import { Address } from '../../models/address';
@@ -39,12 +38,8 @@ export class UsersComponent implements OnInit {
   idCountry_Work = 0;
   idCity_Work= 0;
   idDistrict_Work = 0;
-  // formUsers: FormGroup;
 
-  constructor(private router: Router, private userService: UserService, private addressService: AddressService, private fb: FormBuilder) { 
-    // this.formUsers = new FormGroup({
-    //   Country: new FormControl()
-    // });
+  constructor(private router: Router, private userService: UserService, private addressService: AddressService) { 
   }
 
   ngOnInit() {
@@ -69,6 +64,7 @@ export class UsersComponent implements OnInit {
       }
       else
       {
+        localStorage.removeItem("token");
         this.router.navigate(['login']);
       }
     });

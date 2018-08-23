@@ -81,6 +81,7 @@ export class UserDetailComponent implements OnInit {
       let address: Address = new Address(+this.addressTypeId, +this.idCountry, +this.idCity, +this.idDistrict, this.street);
       console.log(address);
       this.addressService.updateAddressFromId(+this.idAddress, address).subscribe(data => {
+        this.message = "";
         this.detail_address = true;
       });
     }
@@ -124,6 +125,7 @@ export class UserDetailComponent implements OnInit {
   cancel() {
     this.detail_address = true;
     this.detail_user = true;
+    this.message = "";
     // this.location.back();
   }
 }

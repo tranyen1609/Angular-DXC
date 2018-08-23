@@ -70,6 +70,7 @@
         </table>
         <ng-template #edit_address>
             <div class="form-edit">
+                
                 <table class="table table-borderless">
                     <tbody>
                         <tr class="form-group">
@@ -111,6 +112,7 @@
                         </tr>
                     </tbody>
                 </table>
+                <span>{{message}}</span>
                 <div class="btn-action form-edit">
                     <button type="button" class="btn btn-primary btn-save" (click)="updateAddressFromId()">Save</button>
                     <button (click)="cancel()" class="btn btn-primary btn-outline-secondary">Cancel</button>

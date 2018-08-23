@@ -24,6 +24,12 @@ table a:hover{
 .form-edit{
     background-color: #F6F7F9;
 }
+.form-edit span{
+    color: red;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
 .btn-action{
     display: flex;
     justify-content: center;

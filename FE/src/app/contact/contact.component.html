@@ -1,6 +1,46 @@
 <div class="info-contact">
-  <p>
-    contact works!
-  </p>
-</div>
+  <form [formGroup]="formUsers" (ngSubmit)="onSubmit()">
 
+    <div class="form-group">
+      <label for="my-input">User name*</label>
+      <input id="my-input" class="form-control" type="text" formControlName="username">
+    </div>
+    <!-- Cách 1 -->
+    <!-- <span class="label label-danger" *ngIf="formUsers.controls.username.dirty && formUsers.controls.username.errors?.minlength || formUsers.controls.username.errors?.maxlength">User name phải có từ 5-20 kí tự</span>
+    <span class="label label-danger" *ngIf="formUsers.controls.username.touched && formUsers.controls.username.errors?.required">Vui lòng nhập User name!</span> -->
+    <!-- Cách 2 -->
+    <app-validate [control]="formUsers.controls.username" [name-control]="'Username'"></app-validate>
+
+    <div class="form-group">
+      <label for="my-input">Password*</label>
+      <input id="my-input" class="form-control" type="text" formControlName="password">
+    </div>
+    <span class="label label-danger" *ngIf="formUsers.controls.password.touched && formUsers.controls.password.errors?.required">Vui lòng nhập Password!</span>
+
+    <div class="form-group">
+      <label for="my-input">Gender</label>
+      <input id="my-input" class="form-control" type="text" formControlName="gender">
+    </div>
+
+    <div class="form-group">
+      <label for="my-input">Phone Number</label>
+      <input id="my-input" class="form-control" type="number" formControlName="phone">
+    </div>
+    <span class="label label-danger" *ngIf="formUsers.controls.phone.dirty && formUsers.controls.phone.errors?.maxlength">Số điện thoại không đúng!</span>
+
+    <div class="form-group">
+      <label for="my-input">Email</label>
+      <input id="my-input" class="form-control" type="text" formControlName="email">
+    </div>
+    <!-- <span class="label label-danger" *ngIf="formUsers.controls.email.dirty && formUsers.controls.email.errors?.pattern">Email không đúng định dạng!</span> -->
+    <app-validate [control]="formUsers.controls.email" [name-control]="'Email'"></app-validate>
+
+    <div class="form-group">
+      <label for="my-input">Day of Birth</label>
+      <input id="my-input" class="form-control" type="text" formControlName="birthday">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="formUsers.invalid">Save</button>
+    <button type="reset" class="btn btn-primary btn-outline-secondary">Reset</button>
+  </form>
+</div>

@@ -29,10 +29,9 @@ export class AddressService {
   }
 
   getUserAddressFromId(id: number) {
-    let options = {headers: new HttpHeaders( { 'Authorization': 'Bearer '+ localStorage.getItem("token") } )};
+    let options = {headers: new HttpHeaders( { 'Authorization': 'Bearer ' + localStorage.getItem("token") } )};
     const url= (this.apiUserAddress) + '/user/' + (id);
     return this.http.get(url, options).pipe(
-      // map ( Response => JSON.stringify(Response) ),
       catchError(error) );
   }
 

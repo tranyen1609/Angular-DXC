@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -12,12 +12,12 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { UsersComponent } from './users/users.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { ContactComponent } from './contact/contact.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { AddressComponent } from './address/address.component';
+import { ValidateComponent } from './validate/validate.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,8 @@ import { AddressComponent } from './address/address.component';
     ContactComponent,
     SidebarComponent,
     HomeComponent,
-    AddressComponent
+    AddressComponent,
+    ValidateComponent
   ],
   imports: [
     BrowserModule,

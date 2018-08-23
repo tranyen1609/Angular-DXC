@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   private VerifyAccess() {
-    if (localStorage.getItem("user") != null) {
+    if (localStorage.getItem("token") != "") {
       this.router.navigate(['main']);
     }
   }
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         window.location.reload();
       }
       else {
-        this.status = this.userdata.error.message;
+        this.status = this.userdata.error.message +"abc";
       }
     });
   }
