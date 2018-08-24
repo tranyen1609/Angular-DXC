@@ -81,12 +81,12 @@
                                 <td class="gender">
                                     <div class="form-check-inline">
                                         <label class="form-check-label" for="radio1">
-                                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="option1" checked>Male
+                                            <input type="radio" class="form-check-input" name="optradio" value="option1" checked>Male
                                         </label>
                                     </div>
                                     <div class="form-check-inline">
                                         <label class="form-check-label" for="radio2">
-                                            <input type="radio" class="form-check-input" id="radio2" name="optradio" value="option2">Female
+                                            <input type="radio" class="form-check-input" name="optradio" value="option2">Female
                                         </label>
                                     </div>
                                 </td>
@@ -119,7 +119,7 @@
                                             <tr class="form-group">
                                                 <th for="my-input">Country</th>
                                                 <td>
-                                                    <select id="my-input" class="form-control" [(ngModel)]="idCountry_Home" name="countryItem" (change)="getCitiesFromId_Home()">
+                                                    <select class="form-control" [(ngModel)]="idCountry_Home" name="countryItem" (change)="getCitiesFromId_Home()">
                                                         <option [value]="0">Select country</option>
                                                         <option *ngFor="let ctr of countryData_Home.countries" [value]="ctr.id">{{ ctr.name }}</option>
                                                     </select>
@@ -128,7 +128,7 @@
                                             <tr class="form-group">
                                                 <th for="my-input">City</th>
                                                 <td>
-                                                    <select id="my-input" class="form-control" [(ngModel)]="idCity_Home" name="cityItem" (change)="getDistrictsFromId_Home()">
+                                                    <select class="form-control" [(ngModel)]="idCity_Home" name="cityItem" (change)="getDistrictsFromId_Home()">
                                                         <option [value]="0">Select city</option>
                                                         <option *ngFor="let ct of cityData_Home.cities" [value]="ct.id">{{ ct.name }}</option>
                                                     </select>
@@ -137,7 +137,7 @@
                                             <tr class="form-group">
                                                 <th for="my-input">District</th>
                                                 <td>
-                                                    <select id="my-input" class="form-control" [(ngModel)]="idDistrict_Home" name="districtItem">
+                                                    <select class="form-control" [(ngModel)]="idDistrict_Home" name="districtItem">
                                                         <option [value]="0">Select district</option>
                                                         <option *ngFor="let d of districtData_Home.districts" [value]="d.id">{{ d.name }}</option>
                                                     </select>
@@ -168,7 +168,7 @@
                                             <tr class="form-group">
                                                 <th for="my-input">Country</th>
                                                 <td>
-                                                    <select id="my-input" class="form-control" [(ngModel)]="idCountry_Work" name="countryItem_Work" (change)="getCitiesFromId_Work()">
+                                                    <select class="form-control" [(ngModel)]="idCountry_Work" name="countryItem_Work" (change)="getCitiesFromId_Work()">
                                                         <option [value]="0">Select country</option>
                                                         <option *ngFor="let ctr of countryData_Work.countries" [value]="ctr.id">{{ ctr.name }}</option>
                                                     </select>
@@ -177,7 +177,7 @@
                                             <tr class="form-group">
                                                 <th for="my-input">City</th>
                                                 <td>
-                                                    <select id="my-input" class="form-control" [(ngModel)]="idCity_Work" name="cityItem_Work" (change)="getDistrictsFromId_Work()">
+                                                    <select class="form-control" [(ngModel)]="idCity_Work" name="cityItem_Work" (change)="getDistrictsFromId_Work()">
                                                         <option [value]="0">Select city</option>
                                                         <option *ngFor="let ct of cityData_Work.cities" [value]="ct.id">{{ ct.name }}</option>
                                                     </select>
@@ -186,7 +186,7 @@
                                             <tr class="form-group">
                                                 <th for="my-input">District</th>
                                                 <td>
-                                                    <select id="my-input" class="form-control" [(ngModel)]="idDistrict_Work" name="districtItem_Work">
+                                                    <select class="form-control" [(ngModel)]="idDistrict_Work" name="districtItem_Work">
                                                         <option [value]="0">Select district</option>
                                                         <option *ngFor="let d of districtData_Work.districts" [value]="d.id">{{ d.name }}</option>
                                                     </select>

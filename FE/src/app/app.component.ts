@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     
    }
   ngOnInit() {
-    if (localStorage.getItem("token") == "") {
+    if (localStorage.getItem("token") == null) {
       this.a=false;
     }
     else{

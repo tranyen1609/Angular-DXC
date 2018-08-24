@@ -64,6 +64,7 @@ export class UserDetailComponent implements OnInit {
     return this.addressService.getAddressFromId(id).subscribe(data => {
       this.detail_address = false;
       this.addressData = data['address'][0];
+      console.log(this.addressData);
       this.idCountry = this.addressData.countryId;
       this.idCity = this.addressData.cityId;
       this.idDistrict = this.addressData.districtId;
