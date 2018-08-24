@@ -7,17 +7,17 @@ import { Location } from '@angular/common';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  a=true;
+  main=true;
   title = 'FE';
   constructor(private location: Location) {
     
    }
   ngOnInit() {
     if (localStorage.getItem("token") == null) {
-      this.a=false;
+      this.main=false;
     }
     else{
-      this.a=true;
+      this.main=true;
     }
   }
 }

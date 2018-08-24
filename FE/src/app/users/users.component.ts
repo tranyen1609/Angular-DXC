@@ -62,11 +62,6 @@ export class UsersComponent implements OnInit {
         this.totalItems = data.pagination.totalItems;
         this.totalPages = Math.ceil(this.totalItems/4);
       }
-      else
-      {
-        localStorage.removeItem("token");
-        this.router.navigate(['login']);
-      }
     });
   }
 

@@ -17,7 +17,7 @@ const routes: Routes = [
   //Khai báo các route
   {path: 'home', component : HomeComponent},
   {path: 'login', component : LoginComponent},
-  {path: 'main', component : UsersComponent},
+  {path: 'users', component : UsersComponent},
   {path: 'address', component : AddressComponent},
   {path: 'contact', component : ContactComponent},
   //Truyền vào id để xem chi tiết

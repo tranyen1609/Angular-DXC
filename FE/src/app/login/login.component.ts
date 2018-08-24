@@ -20,8 +20,11 @@ export class LoginComponent implements OnInit {
   }
 
   private VerifyAccess() {
-    if (localStorage.getItem("token") != "") {
-      this.router.navigate(['main']);
+    if (localStorage.getItem("token") != null) {
+      this.router.navigate(['users']);
+    }
+    else{
+      this.router.navigate(['login']);
     }
   }
 
@@ -34,7 +37,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem("token", data["token"]);
       if (localStorage.getItem("token") != "") {
         localStorage.setItem("user", this.myName);
-        this.router.navigate(['main']);
+        this.router.navigate(['users']);
         window.location.reload();
       }
       else {

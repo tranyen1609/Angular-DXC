@@ -16,13 +16,11 @@ export class ValidateComponent implements OnInit {
   }
 
   get message(){
-    // console.log(this.control)
     for(let er in this.control.errors){
       if(this.control.dirty){
         return this.getErrorMessage(er, this.control.errors[er]);
       }
     }
-    // return null
   }
   
   getErrorMessage(er, value){

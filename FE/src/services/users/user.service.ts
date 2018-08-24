@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { User,UserData } from '../../models/user';
 import { Router } from '@angular/router';
 import { error } from '@angular/compiler/src/util';
+import { Observable } from 'rxjs';
 // import { of } from 'rxjs/Observable/of';
 // import { Observable } from '../../../node_modules/rxjs/Observable';
 
@@ -33,11 +34,21 @@ export class UserService {
           catchError(error) );
   }
 
-  getUsers(pS: number, pN: number){
+  getUsers(pS: number, pN: number): Observable<UserData>{
     let options = {headers: new HttpHeaders( { 'Authorization': 'Bearer '+ localStorage.getItem("token") } )};
     const url= (this.apiUrl) + '/page?size=' + pS + '&current=' + pN ;
     return this.http.get<UserData>(url, options).pipe(
-      catchError(error) );
+      catchError(error => {
+        console.log(error);
+        if (error instanceof HttpErrorResponse) {
+          switch (error.status) {
+            case 401:
+                localStorage.removeItem("user");
+                localStorage.removeItem("token");
+                window.location.reload();
+          }}else {
+            return Observable.throw(error);
+          }} ));
   }
 
   deleteUser (id: number) {
